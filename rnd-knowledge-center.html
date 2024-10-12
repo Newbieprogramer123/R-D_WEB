@@ -118,16 +118,19 @@
     <script>
         let slideIndex = 0;
         let slides = [];
+        let descriptions = []; // Array untuk menyimpan deskripsi
         const slideInterval = 5000; // Waktu pergantian gambar dalam milidetik (5 detik)
 
         function showSlides() {
             const slidesContainer = document.getElementById("slideshow");
+            const descriptionContainer = document.getElementById("description"); // Container untuk deskripsi
             slidesContainer.innerHTML = slides[slideIndex]; // Ganti gambar atau video
+            descriptionContainer.innerHTML = descriptions[slideIndex]; // Tampilkan deskripsi yang sesuai
         }
 
         function initSlides() {
             slides = [
-                '<img src="https://i.imgur.com/to8y6vt.png" alt="Image 1" width="640" height="480" />', // Gambar pertama
+                '<img src="https://i.imgur.com/B8ISkoI.png" alt="Image 1" width="640" height="480" />', // Gambar pertama
                 '<img src="https://i.imgur.com/to8y6vt.png" alt="Image 2" width="640" height="480" />', // Gambar kedua
                 '<div style="position: relative;">' + // Video pertama
                 '<iframe src="https://www.youtube.com/embed/N-Gh5Sez53U" allowfullscreen></iframe>' +
@@ -137,6 +140,12 @@
                 '<iframe src="https://www.youtube.com/embed/RF3PVySYi2o" allowfullscreen></iframe>' +
                 '<button class="button next" onclick="nextVideo(); event.stopPropagation();">Next</button>' +
                 '</div>'
+            ];
+            descriptions = [
+                '<strong>WIR - Research and Developments</strong><br>Research and development (R&D) is the process of exploring and creating new ideas, products, or technologies through systematic investigation. It drives innovation, enhances efficiency, and fosters competitiveness by identifying solutions to complex problems, leading to improved products, services, and processes that benefit businesses and society.', // Deskripsi untuk gambar 1
+                '<strong>Research And Developments Member</strong><br>Dari Kanan - Kiri: Setiabudi - Retno - Reza - Gilang - Budi.', // Deskripsi untuk gambar 2
+                '<strong>Research And Developments Project</strong><br>Business Unit Project - DAV - Smart Assistant for Kiosk: Davina.', // Deskripsi untuk video 1
+                '<strong>Research And Developments Project</strong><br>Business Unit Project - DAV - Smart Assistant for Kiosk: Davina.' // Deskripsi untuk video 2
             ];
             showSlides(); // Tampilkan gambar/video pertama
         }
@@ -152,12 +161,8 @@
         }
 
         function nextVideo() {
-            if (slideIndex < slides.length - 1) { // Cek apakah video selanjutnya ada
-                slideIndex++;
-            } else {
-                slideIndex = 0; // Kembali ke gambar pertama setelah video terakhir
-            }
-            showSlides(); // Tampilkan video/gambar
+            slideIndex = (slideIndex + 1) % slides.length; // Pergi ke gambar/video berikutnya
+            showSlides(); // Tampilkan gambar/video
         }
 
         function showContent(contentId) {
@@ -186,12 +191,12 @@
     <div id="home" class="content active">
         <h1>WIR - Research and Development</h1>
         <p class="description">
-            Research and development (R&D) is the process of exploring and creating new ideas, products, or technologies through systematic investigation. It drives innovation, enhances efficiency, and fosters competitiveness by identifying solutions to complex problems, leading to improved products, services, and processes that benefit businesses and society.
         </p>
         <div id="slideshow" class="slideshow" onclick="nextSlide()"> <!-- Slideshow -->
             <button class="button prev" onclick="previousSlide(); event.stopPropagation();">Previous</button> <!-- Tombol Previous -->
             <button class="button next" onclick="nextSlide(); event.stopPropagation();">Next</button> <!-- Tombol Next -->
-        </div> 
+        </div>
+        <div id="description" class="description"></div> <!-- Deskripsi di bawah slideshow -->
     </div>
 
     <!-- Patent Content -->
